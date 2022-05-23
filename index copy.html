@@ -12,8 +12,9 @@
 
 
     function erPalindrom(tall) {
-      if (antallForsok > 300) {
-        console.error("Fant ikke palindromet på 300 forsøk");
+      if (antallForsok >= 289) {
+        console.error("Fant ikke palindromet på 289 forsøk");
+        document.write(`<br> <font color="red"> Fant ikke palindromet på 261 forsøk`);
         return;
       }
       antallForsok++;
