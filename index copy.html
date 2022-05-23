@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palindrom</title>
+</head>
+<body>
+  <script>
+    let startTall = prompt("Tall å prøve");
+    let antallForsok = 0;
+    erPalindrom(startTall);
+
+
+    function erPalindrom(tall) {
+      if (antallForsok > 300) {
+        console.error("Fant ikke palindromet på 300 forsøk");
+        return;
+      }
+      antallForsok++;
+      let reversert = BigInt(reverser(tall));
+      let sum = BigInt(tall) + reversert;
+      console.log("  " + tall+ "\n+ " + reversert + "\n= " + sum + " Forsøk: " + antallForsok);
+      document.write("<br> &nbsp &nbsp" + tall+ "<br> + " + reversert + "<br>= " + sum + " Forsøk: " + antallForsok + "<br>")
+
+      if (sum == reverser(sum)) {
+        console.log("%cPalindrom: " + sum, "color: green;");
+        console.log("Baklengs:  " + reverser(sum));
+        console.log(`Fant palindromet på ${antallForsok} forsøk`);
+
+        document.write(`<br> <font color="green"> Palindrom: ${sum}`);
+        document.write("<br>Baklengs: &nbsp " + reverser(sum));
+        document.write(`<br> <font color="green"> Fant palindromet på ${antallForsok} forsøk`);
+      } else {
+        erPalindrom(sum);
+      }
+    }
+
+    function reverser(tall) {
+      tall = tall.toString();
+      let string = tall.split("");
+      let reversert = string.reverse();
+      let sattSammen = reversert.join("");
+
+      return(sattSammen);
+    }
+  </script>
+</body>
+</html>
