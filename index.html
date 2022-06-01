@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Palindrom</title>
+  <style>
+    @media only screen and (orientation: portrait) {
+      body {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let startTall = prompt("Tall å prøve");
+    let antallForsok = 0;
+    let maksForsok = 1000;
+    let output = "";
+
+    let startTid = performance.now();
+    erPalindrom(startTall);
+    let sluttTid = performance.now();
+
+    let writeTidStart = performance.now();
+    document.write(`<font color="orange"> Funksjonen erPalindrom tok ${sluttTid - startTid} millisekunder <br>`);
+    document.write("<font color=\"black\">");
+    document.write(output);
+    document.write(`<br> <font color="orange"> Funksjonen erPalindrom tok ${sluttTid - startTid} millisekunder`);
+    let writeTidSlutt = performance.now();
+    document.write(`<br> <font color="orange"> Å skrive til skjermen tok ${writeTidSlutt - writeTidStart} millisekunder`);
+    document.write(`<br> <font color="orange"> Hele prosessen tok ${sluttTid - startTid + writeTidSlutt - writeTidStart} millisekunder`);
+
+    function erPalindrom(tall) {
+      if (antallForsok >= maksForsok) {
+        output += `<br> <font color="red"> Fant ikke palindromet på ${maksForsok} forsøk <br>`;
+        return;
+      }
+      antallForsok++;
+      let reversert = BigInt(reverser(tall));
+      let sum = BigInt(tall) + reversert;
+      output += "<br>&nbsp &nbsp" + tall+ "<br> + " + reversert + "<br>= " + sum + " Forsøk: " + antallForsok + "<br>";
+
+      if (sum == reverser(sum)) {
+        output += `<br> <font color="green"> Palindrom: ${sum}`
+        output += "<br>Baklengs: &nbsp " + reverser(sum)
+        output += `<br> <font color="green"> Fant palindromet på ${antallForsok} forsøk <br>`
+      } else {
+        erPalindrom(sum);
+      }
+    }
+
+    function reverser(tall) {
+      tall = tall.toString();
+      let string = tall.split("");
+      let reversert = string.reverse();
+      let sattSammen = reversert.join("");
+
+      return(sattSammen);
+    }
+  </script>
+</body>
+</html>
